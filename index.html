@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,49 +7,51 @@
   <title>Sistema Emissor PPCI | Ferramenta Profissional</title>
   <meta name="description" content="Plataforma digital para geração automatizada e requerimento do Plano de Prevenção e Proteção Contra Incêndios (PPCI) conforme normas do CBMRS.">
   
-  <!-- ÍCONES E CONFIGURAÇÕES PWA -->
+  <!-- ÍCONES PADRÃO (Sem bordas brancas) -->
   <link rel="icon" type="image/png" href="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png">
   <link rel="apple-touch-icon" href="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png">
+  
+  <!-- CONFIGURAÇÕES DE TELA (iOS e Android) -->
   <meta name="theme-color" content="#0f172a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Gerador PPCI">
   
-  <!-- MANIFESTO PWA (Permite instalação no celular) -->
-  <link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Sistema Emissor PPCI","short_name":"Gerador PPCI","start_url":"/","display":"standalone","background_color":"#f1f5f9","theme_color":"#0f172a","icons":[{"src":"https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}'>
+  <!-- LIGAÇÃO COM O ARQUIVO MANIFEST (Crucial para o botão "Instalar App") -->
+  <link rel="manifest" href="manifest.json">
 
-  <!-- OPEN GRAPH (Preview para WhatsApp, LinkedIn e Redes Sociais) -->
+  <!-- OPEN GRAPH / SEO (Para o Preview perfeito no WhatsApp, Facebook, LinkedIn) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Sistema Emissor PPCI | Digital">
-  <meta property="og:description" content="Geração automatizada de formulários PPCI e integração direta para envio de protocolos.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1542204637-1834e0046535?q=80&w=1200&auto=format&fit=crop">
+  <meta property="og:url" content="https://seulinkdogithub.github.io/ppci"> <!-- Troque pelo seu link real do Github Pages -->
+  <meta property="og:title" content="Sistema Emissor PPCI | Ferramenta Digital">
+  <meta property="og:description" content="Geração automatizada de formulários PPCI e integração direta para envio de protocolos via WhatsApp.">
+  <!-- Imagem do Preview (A sua imagem de fundo suave) -->
+  <meta property="og:image" content="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775534414/logo_make_11_06_2023_117_ytmfxd.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- Twitter Card (Garante o preview ampliado no Twitter/X e WhatsApp Web) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sistema Emissor PPCI | Ferramenta Digital">
+  <meta name="twitter:description" content="Geração automatizada de formulários PPCI e envio via WhatsApp.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775534414/logo_make_11_06_2023_117_ytmfxd.jpg">
 
-  <!-- BIBLIOTECAS CDN (100% Estáveis) -->
+  <!-- BIBLIOTECAS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- jsPDF para gerar o arquivo PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- ESTILOS GLOBAIS E ANIMAÇÕES -->
+  <!-- ESTILOS GLOBAIS -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-    
     body { margin: 0; padding: 0; background-color: #0f172a; font-family: 'Outfit', system-ui, sans-serif; }
-    
-    @keyframes floatUp { 
-      0% { transform: translateY(0) scale(1); opacity: 0; } 
-      20% { opacity: 1; } 
-      100% { transform: translateY(-400px) translateX(20px) scale(0.3); opacity: 0; } 
-    }
+    @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-400px) translateX(20px) scale(0.3); opacity: 0; } }
     .ember { position: absolute; background: #ff5a00; border-radius: 50%; box-shadow: 0 0 10px #ff5a00, 0 0 20px #ff0000; animation: floatUp linear infinite; z-index: 15; pointer-events: none; }
-    
     .badge-3d-wrapper { perspective: 1000px; display: inline-block; }
     .badge-3d { transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.6s ease; filter: grayscale(100%) opacity(0.4) drop-shadow(0px 2px 2px rgba(0,0,0,0.5)); transform-style: preserve-3d; }
     .badge-3d-wrapper:hover .badge-3d { transform: rotateY(18deg) rotateX(10deg) scale(1.4) translateY(-5px); filter: grayscale(0%) opacity(1) drop-shadow(-15px 15px 15px rgba(0,0,0,0.6)); }
-
-    /* Remove as setas (spinners) dos inputs de número no Chrome/Safari */
     input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type=number] { -moz-appearance: textfield; }
   </style>
@@ -61,7 +62,6 @@
   <script type="text/babel">
     const { useState, useRef } = React;
 
-    // --- BANCO DE ÍCONES NATIVOS (Alta Performance, sem CDN externa) ---
     const iconPaths = {
       "check-circle-2": <React.Fragment><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></React.Fragment>,
       "phone": <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>,
@@ -86,14 +86,11 @@
       "edificacao": <React.Fragment><path d="m12 2-9 4.5L12 11l9-4.5L12 2Z" /><path d="m3 11 9 4.5L21 11" /><path d="m3 16 9 4.5L21 16" /><path d="M12 11v11" /></React.Fragment>,
       "sistemas": <React.Fragment><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /><path d="M12 8v.01" /></React.Fragment>
     };
-
-    const Icon = ({ name, className, strokeWidth = 2 }) => (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}>
-        {iconPaths[name]}
-      </svg>
-    );
     
-    // --- APLICAÇÃO PRINCIPAL ---
+    const Icon = ({ name, className, strokeWidth = 2 }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}>{iconPaths[name]}</svg>
+    );
+
     function App() {
       const [currentStep, setCurrentStep] = useState(1);
       const [isSubmitted, setIsSubmitted] = useState(false);
@@ -109,7 +106,6 @@
         detalhes: { extintoresAno: '', alarmeMarca: '' }
       });
 
-      // Máscaras Dinâmicas
       const maskCpfCnpj = (value) => {
         let v = value.replace(/\D/g, "");
         if (v.length <= 11) {
@@ -122,8 +118,7 @@
 
       const maskPhone = (value) => {
         let v = value.replace(/\D/g, "");
-        v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
-        v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+        v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); v = v.replace(/(\d)(\d{4})$/, "$1-$2");
         return v.substring(0, 15);
       };
 
@@ -154,7 +149,6 @@
         } else setFormData(prev => ({ ...prev, [name]: value }));
       };
 
-      // Simulação de Interface de Anexos
       const handleFileSelect = (e) => {
         if (e.target.files && e.target.files.length > 0) {
           const newFiles = Array.from(e.target.files).map(file => ({ id: Math.random().toString(36).substr(2, 9), name: file.name, size: (file.size / 1024 / 1024).toFixed(2), progress: 0, status: 'uploading' }));
@@ -176,7 +170,6 @@
       const nextStep = () => { setCurrentStep(prev => Math.min(prev + 1, 4)); window.scrollTo({ top: 200, behavior: 'smooth' }); };
       const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
-      // Fetch de Imagem Base64 Seguro (CORS)
       const getBase64ImageFromURL = (url) => {
         return new Promise((resolve, reject) => {
           var img = new Image();
@@ -193,24 +186,20 @@
         });
       };
 
-      // --- LÓGICA CENTRAL: GERAÇÃO DE PDF E WHATSAPP ---
       const handleSubmit = async (e) => {
         e.preventDefault();
         if (currentStep !== 4) return;
         setIsGeneratingPdf(true);
 
         try {
-          // 1. Instancia o jsPDF
           const { jsPDF } = window.jspdf;
           const doc = new jsPDF();
           
-          // 2. Adiciona o Brasão
           try {
             const logoBase64 = await getBase64ImageFromURL("https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png");
             doc.addImage(logoBase64, 'PNG', 93, 10, 24, 24);
           } catch(err) { console.log("Aviso: Logo não carregada no PDF", err); }
 
-          // 3. Monta o Documento Oficial
           doc.setFont("helvetica", "bold"); doc.setFontSize(14);
           doc.text("CORPO DE BOMBEIROS MILITAR DO RS", 105, 42, null, null, "center");
           doc.setFontSize(11);
@@ -245,12 +234,8 @@
             const hasSys = formData.medidas[key];
             doc.text(`[ ${hasSys ? 'X' : '  '} ] ${sysLabels[key]}`, 20, yPos);
             yPos += 6;
-            if(hasSys && key === 'extintores' && formData.detalhes.extintoresAno) {
-              doc.text(`      -> Ano da Recarga: ${formData.detalhes.extintoresAno}`, 20, yPos); yPos += 6;
-            }
-            if(hasSys && key === 'alarme' && formData.detalhes.alarmeMarca) {
-              doc.text(`      -> Marca da Central: ${formData.detalhes.alarmeMarca}`, 20, yPos); yPos += 6;
-            }
+            if(hasSys && key === 'extintores' && formData.detalhes.extintoresAno) { doc.text(`      -> Ano da Recarga: ${formData.detalhes.extintoresAno}`, 20, yPos); yPos += 6; }
+            if(hasSys && key === 'alarme' && formData.detalhes.alarmeMarca) { doc.text(`      -> Marca da Central: ${formData.detalhes.alarmeMarca}`, 20, yPos); yPos += 6; }
           });
 
           yPos += 10;
@@ -258,17 +243,14 @@
           doc.text("Declaro sob as penas da lei (Art. 299 do Código Penal) que as informações", 20, yPos);
           doc.text("aqui prestadas são verdadeiras e de minha inteira responsabilidade.", 20, yPos + 5);
 
-          // 4. Download Automático do PDF
           const pdfFileName = `Requerimento_PPCI_${formData.documento.replace(/\D/g, '') || 'Oficial'}.pdf`;
           doc.save(pdfFileName);
 
-          // 5. Encaminhamento 100% Estável para o WhatsApp
           const telefoneDestino = "5551986389656";
           const mensagem = `🚨 *NOVO REQUERIMENTO PPCI* 🚨\n\n*Responsável:* ${formData.nome}\n*CNPJ/CPF:* ${formData.documento}\n*Endereço:* ${formData.logradouro}, ${formData.numero} - ${formData.cidade}/${formData.uf}\n*Risco:* ${formData.tipoUso.toUpperCase()} | *Área:* ${formData.area}m²\n\nOlá! Acabei de gerar a emissão do formulário no sistema.\n\n*Estou enviando em anexo a este contato o arquivo PDF gerado com o detalhamento completo para a liberação.* 🚒`;
 
           const urlWhatsapp = `https://wa.me/${telefoneDestino}?text=${encodeURIComponent(mensagem)}`;
           
-          // Abre em nova aba. Se o navegador bloquear, força o redirect na aba atual para garantir funcionamento no celular!
           const novaAba = window.open(urlWhatsapp, '_blank');
           if (!novaAba || novaAba.closed || typeof novaAba.closed == 'undefined') {
              window.location.href = urlWhatsapp;
@@ -283,32 +265,20 @@
         setIsSubmitted(true);
       };
 
-      const Tooltip = ({ text }) => (
-        <div className="group relative ml-2 inline-flex items-center justify-center cursor-help">
-          <Icon name="help-circle" className="w-4 h-4 text-slate-400 hover:text-red-500 transition-colors" />
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-slate-900 text-white text-xs rounded shadow-lg z-50 text-center">
-            {text}<div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
-          </div>
-        </div>
-      );
-
       return (
         <div className="min-h-screen bg-slate-100 text-slate-800 pb-10">
           
-          {/* HERO SECTION - Profissional */}
           <section className="relative w-full h-[65vh] min-h-[480px] flex items-center justify-center overflow-hidden bg-slate-950 border-b-4 border-red-600">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542204637-1834e0046535?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 z-0"></div>
-            
             <video autoPlay loop muted playsInline crossOrigin="anonymous" className="absolute inset-0 z-10 opacity-60 mix-blend-screen w-full h-full object-cover">
               <source src="https://player.vimeo.com/external/3115814.sd.mp4?s=db07e6f3322123f8cb20cdccba68b4ef214d0263&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
             </video>
-            
             <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-900/60 to-slate-100 z-10"></div>
             
             {Array.from({ length: 25 }).map((_, i) => (
               <div key={i} className="ember" style={{ left: `${Math.random() * 100}%`, bottom: `${Math.random() * 30 - 10}%`, width: `${Math.random() * 4 + 2}px`, height: `${Math.random() * 4 + 2}px`, animationDuration: `${Math.random() * 3 + 2}s`, animationDelay: `${Math.random() * 3}s` }} />
             ))}
-                        
+                       
             <div className="relative z-20 text-center px-4 max-w-4xl mx-auto transform -translate-y-8 flex flex-col items-center">
               <div className="relative mb-6 drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
                 <img src="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png" alt="Brasão CBMRS" className="w-24 h-24 md:w-32 md:h-32 object-contain" />
@@ -318,7 +288,6 @@
             </div>
           </section>
 
-          {/* FORMULÁRIO */}
           <main className="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 pb-20">
             <div className="bg-slate-50/90 backdrop-blur-sm rounded-3xl shadow-[0_20px_50px_rgb(0,0,0,0.15)] overflow-hidden border border-slate-200/50 relative">
               <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.25]" style={{ backgroundImage: "url('https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775534414/logo_make_11_06_2023_117_ytmfxd.jpg')", backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat" }}/>
@@ -343,7 +312,6 @@
 
               <form onSubmit={handleSubmit} className="relative p-6 md:p-10 z-10">
                 
-                {/* ETAPA 1 */}
                 {currentStep === 1 && (
                   <div className="animate-in fade-in slide-in-from-right-8 duration-500">
                     <div className="flex items-center space-x-4 mb-6 pb-2 border-b border-slate-300/50">
@@ -359,7 +327,6 @@
                   </div>
                 )}
 
-                {/* ETAPA 2 */}
                 {currentStep === 2 && (
                   <div className="animate-in fade-in slide-in-from-right-8 duration-500">
                     <div className="flex items-center space-x-4 mb-6 pb-2 border-b border-slate-300/50">
@@ -393,8 +360,7 @@
                     </div>
                   </div>
                 )}
-
-                {/* ETAPA 3 */}
+                
                 {currentStep === 3 && (
                   <div className="animate-in fade-in slide-in-from-right-8 duration-500">
                     <div className="flex items-center space-x-4 mb-6 pb-2 border-b border-slate-300/50">
@@ -420,8 +386,7 @@
                     </div>
                   </div>
                 )}
-                
-                {/* ETAPA 4 */}
+
                 {currentStep === 4 && (
                   <div className="animate-in fade-in slide-in-from-right-8 duration-500">
                     <div className="bg-slate-800/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700 shadow-xl relative">
@@ -467,7 +432,6 @@
                   </div>
                 )}
 
-                {/* BOTÕES DE NAVEGAÇÃO E SUBMIT */}
                 <div className={`mt-8 pt-6 border-t border-slate-300/50 flex ${currentStep === 1 ? 'justify-end' : 'justify-between'} items-center`}>
                   {currentStep > 1 && <button type="button" onClick={prevStep} className="px-6 py-3 font-bold hover:bg-slate-200/50 rounded-xl flex gap-2"><Icon name="chevron-left" className="w-5 h-5"/> Voltar</button>}
                   {currentStep < 4 ? <button type="button" onClick={nextStep} className="px-8 py-3.5 bg-slate-800 text-white font-bold rounded-xl flex gap-2">Avançar <Icon name="chevron-right" className="w-5 h-5"/></button>
@@ -478,7 +442,6 @@
                   }
                 </div>
 
-                {/* MODAL FINAL DE INSTRUÇÃO E REDIRECT */}
                 {isSubmitted && (
                   <div className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-300">
                     <div className="w-28 h-28 bg-green-500/20 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(34,197,94,0.4)] border-2 border-green-400 mb-6 relative">
@@ -512,7 +475,16 @@
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
+
+  <!-- REGISTRO DO SERVICE WORKER PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker Registrado com sucesso!', reg))
+          .catch(err => console.log('Falha ao registrar Service Worker', err));
+      });
+    }
+  </script>
 </body>
 </html>
-
-
