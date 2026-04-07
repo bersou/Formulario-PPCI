@@ -1,48 +1,23 @@
 {
   "name": "Sistema Emissor PPCI",
-  "short_name": "Gerador PPCI",
-  "start_url": "./index.html",
+  "short_name": "Emissor PPCI",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
-  "description": "Geração automatizada e inteligente de requerimentos de vistoria do PPCI.",
+  "description": "Geração automatizada de formulários PPCI e integração direta para envio de protocolos.",
   "icons": [
     {
       "src": "https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
-
-### 3. O Service Worker (`sw.js`)
-Por último, crie o arquivo `sw.js` na mesma pasta e cole este código. Ele é um script silencioso que avisa ao Google Chrome/Safari que a sua aplicação possui suporte à instalação. Sem ele, a opção "Instalar Aplicativo" nunca aparece.
-
-```javascript
-// O Service Worker mínimo necessário para ativar a instalação PWA
-const CACHE_NAME = 'ppci-cache-v1';
-
-self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Força a instalação imediata
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim()); // Toma o controle das abas abertas
-});
-
-// Passa as requisições direto para a rede (Não faz cache agressivo para evitar bugs em atualizações)
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    fetch(event.request).catch(() => {
-      // Retorna uma falha graciosa caso o usuário fique sem internet
-      return new Response('Você está offline e não temos essa página no cache.');
-    })
-  );
-});
