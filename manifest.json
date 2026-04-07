@@ -1,20 +1,20 @@
 {
   "name": "Sistema Emissor PPCI",
-  "short_name": "Emissor PPCI",
-  "start_url": "./",
+  "short_name": "PPCI App",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
+  "background_color": "#7a0b0b",
   "theme_color": "#0f172a",
   "description": "Geração automatizada de formulários PPCI e integração direta para envio de protocolos.",
   "icons": [
     {
-      "src": "https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png",
+      "src": "icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
