@@ -43,8 +43,15 @@
     #splash-screen {
       position: fixed; inset: 0; z-index: 999999;
       background: #f8fafc url('intro.png') no-repeat center center;
-      background-size: contain; /* Preserva a logo centralizada sem zoom excessivo */
+      background-size: contain;
       transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    }
+
+    /* Ajuste específico para garantir que o background preencha toda a tela em celulares altos */
+    @media (orientation: portrait) {
+      #splash-screen {
+        background-size: cover;
+      }
     }
     .hide-splash { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -53,8 +60,8 @@
     .badge-3d-wrapper { perspective: 1000px; display: inline-block; }
     .badge-3d { transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.6s ease; filter: grayscale(100%) opacity(0.4) drop-shadow(0px 2px 2px rgba(0,0,0,0.5)); transform-style: preserve-3d; }
     .badge-3d-wrapper:hover .badge-3d { transform: rotateY(18deg) rotateX(10deg) scale(1.4) translateY(-5px); filter: grayscale(0%) opacity(1) drop-shadow(-15px 15px 15px rgba(0,0,0,0.6)); }
-    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; appearance: textfield; }
   </style>
 </head>
 <body>
