@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ppci-pwa-v3';
+const CACHE_NAME = 'ppci-pwa-v5';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
