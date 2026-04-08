@@ -22,12 +22,12 @@
   <meta property="og:url" content="https://bersou.github.io/Formulario-PPCI/">
   <meta property="og:title" content="Sistema Emissor PPCI | Ferramenta Digital">
   <meta property="og:description" content="Geração automatizada de formulários PPCI e integração direta para envio de protocolos via WhatsApp.">
-  <meta property="og:image" itemprop="image" content="https://bersou.github.io/Formulario-PPCI/preview.png">
+  <meta property="og:image" itemprop="image" content="https://bersou.github.io/Formulario-PPCI/preview.png?v=5">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://bersou.github.io/Formulario-PPCI/preview.png">
+  <meta name="twitter:image" content="https://bersou.github.io/Formulario-PPCI/preview.png?v=5">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -42,7 +42,7 @@
     /* EFEITO DA TELA DE INTRO (Splash Screen) */
     #splash-screen {
       position: fixed; inset: 0; z-index: 999999;
-      background: #0f172a url('intro.png') no-repeat center center;
+      background: #f8fafc url('intro.png') no-repeat center center;
       background-size: contain; /* Preserva a logo centralizada sem zoom excessivo */
       transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
     }
@@ -468,7 +468,9 @@
 
           <footer className="bg-slate-950 text-center py-12 mt-12 text-slate-400 text-sm border-t border-slate-900 relative z-10">
             <div className="flex flex-col items-center justify-center gap-4 mb-4">
-               <div className="badge-3d-wrapper"><img src="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png" alt="Brasão" className="w-16 h-16 object-contain badge-3d" /></div>
+               <div className="badge-3d-wrapper">
+                 <img src="https://res.cloudinary.com/dnymahpi7/image/upload/q_auto/f_auto/v1775335232/Brasao_cbmrs_ql8wfq.png" alt="Brasão" className="w-16 h-16 object-contain badge-3d" />
+               </div>
               <span className="font-bold text-slate-500 uppercase tracking-widest text-xs">Sistema Emissor - Uso Profissional</span>
             </div>
           </footer>

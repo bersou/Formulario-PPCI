@@ -3,7 +3,7 @@
   "short_name": "PPCI App",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#7a0b0b",
+  "background_color": "#f8fafc",
   "theme_color": "#0f172a",
   "description": "Geração automatizada de formulários PPCI e integração direta para envio de protocolos.",
   "icons": [
